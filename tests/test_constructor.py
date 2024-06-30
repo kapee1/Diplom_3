@@ -8,7 +8,7 @@ class TestConstructor:
     @allure.title('Клик по кнопке "конструктор" в хедере открывает раздел конструктор ')
     def test_click_on_constructor_btn_opens_constructor(self, driver):
         page = MainPage(driver)
-        page.open_page(urls.login_url)
+        page.open_page(urls.main_url + urls.login_url)
         page.click_on_constructor_button()
 
         assert page.is_constructor_displayed()
@@ -16,7 +16,7 @@ class TestConstructor:
     @allure.title('Клик по кнопке "список заказов" открывает раздел список заказов')
     def test_click_on_order_list_button_opens_order_list(self, driver):
         page = MainPage(driver)
-        page.open_page(urls.login_url)
+        page.open_page(urls.main_url + urls.login_url)
         page.click_on_order_list_button()
 
         assert page.is_order_list_displayed()

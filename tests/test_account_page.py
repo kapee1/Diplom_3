@@ -12,7 +12,7 @@ class TestAccountPage:
         main = MainPage(driver)
         main.click_on_my_account_button()
 
-        assert main.get_current_url() == urls.login_url
+        assert main.get_current_url() == (urls.main_url + urls.login_url)
 
     @allure.title('Клик по кнопке "История заказов" открывает историю заказов')
     def test_open_orders_history(self, driver, create_and_delete_user):
@@ -20,10 +20,10 @@ class TestAccountPage:
         account = AccountPage(driver)
         user_data = create_and_delete_user
         login.authorization(user_data)
-        account.open_page(urls.profile_url)
+        account.open_page(urls.main_url + urls.profile_url)
         account.click_on_order_history_button()
 
-        assert account.get_current_url() == urls.order_history_url
+        assert account.get_current_url() == (urls.main_url + urls.order_history_url)
 
     @allure.title('Выход из аккаунта')
     def test_logout_from_account(self, driver, create_and_delete_user):
@@ -31,8 +31,8 @@ class TestAccountPage:
         account = AccountPage(driver)
         user_data = create_and_delete_user
         login.authorization(user_data)
-        login.open_page(urls.profile_url)
+        login.open_page(urls.main_url + urls.profile_url)
         account.click_on_log_out_button()
 
-        assert account.get_current_url() == urls.login_url
+        assert account.get_current_url() == (urls.main_url + urls.login_url)
 

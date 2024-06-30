@@ -31,7 +31,7 @@ class LoginPage(BasePage):
 
     @allure.step('Авторизация пользователя')
     def authorization(self, user):
-        self.open_page(urls.login_url)
+        self.open_page(urls.main_url + urls.login_url)
         self.fill_email_field(user['email'])
         self.fill_password_field(user['password'])
         self.click_on_login_button()

@@ -10,7 +10,7 @@ class TestFeedOrders:
     @allure.title('Клик по заказа открывает окно заказа')
     def test_click_on_order_opens_details_window(self, driver):
         page = FeedPage(driver)
-        page.open_page(urls.feed_page_url)
+        page.open_page(urls.main_url + urls.feed_page_url)
         page.click_on_last_order_in_feed()
 
         assert page.is_order_window_displayed()
@@ -25,12 +25,12 @@ class TestFeedOrders:
         main.create_new_order()
 
         account = AccountPage(driver)
-        account.open_page(urls.profile_url)
+        account.open_page(urls.main_url + urls.profile_url)
         account.click_on_order_history_button()
         last_order_number_in_account_history = account.get_number_of_last_order()
 
         feed = FeedPage(driver)
-        feed.open_page(urls.feed_page_url)
+        feed.open_page(urls.main_url + urls.feed_page_url)
 
         assert feed.get_last_order_numbers_in_feed() == last_order_number_in_account_history
 
@@ -41,14 +41,14 @@ class TestFeedOrders:
         login.authorization(user_data)
 
         feed = FeedPage(driver)
-        feed.open_page(urls.feed_page_url)
+        feed.open_page(urls.main_url + urls.feed_page_url)
         orders_before = feed.get_number_of_all_orders()
 
         main = MainPage(driver)
         main.click_on_logo_to_return_to_main()
         main.create_new_order()
 
-        feed.open_page(urls.feed_page_url)
+        feed.open_page(urls.main_url + urls.feed_page_url)
         order_after = feed.get_number_of_all_orders()
 
         assert order_after > orders_before
@@ -60,14 +60,14 @@ class TestFeedOrders:
         login.authorization(user_data)
 
         feed = FeedPage(driver)
-        feed.open_page(urls.feed_page_url)
+        feed.open_page(urls.main_url + urls.feed_page_url)
         orders_before = feed.get_number_of_today_orders()
 
         main = MainPage(driver)
         main.click_on_logo_to_return_to_main()
         main.create_new_order()
 
-        feed.open_page(urls.feed_page_url)
+        feed.open_page(urls.main_url + urls.feed_page_url)
         order_after = feed.get_number_of_today_orders()
 
         assert order_after > orders_before
@@ -84,7 +84,7 @@ class TestFeedOrders:
         order_number = main.get_number_of_created_order()
 
         feed = FeedPage(driver)
-        feed.open_page(urls.feed_page_url)
+        feed.open_page(urls.main_url + urls.feed_page_url)
         feed.wait_order_in_work_list(order_number)
 
         assert order_number in feed.get_number_order_in_work_list()
