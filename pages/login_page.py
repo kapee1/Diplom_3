@@ -2,8 +2,6 @@ import allure
 import urls
 from locators.login_page_locators import LoginPageLocators
 from pages.base_page import BasePage
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 
 
 class LoginPage(BasePage):
@@ -37,5 +35,4 @@ class LoginPage(BasePage):
         self.fill_email_field(email)
         self.fill_password_field(password)
         self.click_on_login_button()
-        WebDriverWait(self.driver, 10).until(
-            expected_conditions.invisibility_of_element_located(LoginPageLocators.email_field_locator))
+        self.wait_until_element_is_invisible(LoginPageLocators.email_field_locator)

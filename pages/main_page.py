@@ -1,7 +1,5 @@
 from pages.base_page import BasePage
 from locators.main_page_locators import MainPageLocators
-from selenium.webdriver.support import expected_conditions
-from selenium.webdriver.support.wait import WebDriverWait
 from seletools.actions import drag_and_drop
 import allure
 
@@ -14,8 +12,7 @@ class MainPage(BasePage):
     @allure.step('Клик по кнопке "создать заказ"')
     def click_on_create_order_btn(self):
         self.click(MainPageLocators.create_order_button_locator)
-        WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located
-                                             (MainPageLocators.order_identifier_text_locator))
+        self.wait_until_element_is_visible(MainPageLocators.order_identifier_text_locator)
 
     @allure.step('Отображается ли окно ингредиента')
     def is_ingredient_window_displayed(self):
@@ -52,8 +49,7 @@ class MainPage(BasePage):
     @allure.step('Клик по кнопки закрытия окна игредиента')
     def close_ingredient_window(self):
         self.click(MainPageLocators.close_button_on_ingredient_window_locator)
-        WebDriverWait(self.driver, 10).until(
-            expected_conditions.invisibility_of_element_located(MainPageLocators.ingredient_window_locator))
+        self.wait_until_element_is_invisible(MainPageLocators.ingredient_window_locator)
 
     @allure.step('Перетаскивание элемента в корзину для оформления заказа')
     def drag_and_drop_element_to_basket(self):
@@ -73,11 +69,9 @@ class MainPage(BasePage):
     @allure.step('Клик по лого в хедере для возарата на главную')
     def click_on_logo_to_return_to_main(self):
         self.click(MainPageLocators.logo_in_header_locator)
-        WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located
-                                             (MainPageLocators.constructor_text_locator))
+        self.wait_until_element_is_visible(MainPageLocators.constructor_text_locator)
 
     @allure.step('Получить номер оформленного заказа')
     def get_number_of_created_order(self):
-        WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located
-                                             (MainPageLocators.loader_in_order_window_locator))
+        self.wait_until_element_to_be_presented(MainPageLocators.loader_in_order_window_locator)
         return self.get_text(MainPageLocators.order_number_in_order_window)

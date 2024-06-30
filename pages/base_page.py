@@ -16,7 +16,7 @@ class BasePage:
     def get_current_url(self):
         return self.driver.current_url
 
-    @allure.step('Найти и дождаться появляения элемента')
+    @allure.step('Дождаться появляения элемента и найти его')
     def wait_and_find_element(self, locator):
         WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(locator))
         return self.driver.find_element(*locator)
@@ -58,3 +58,19 @@ class BasePage:
     @allure.step('Отображается ли элемент')
     def is_element_displayed(self, locator):
         return self.driver.find_element(*locator).is_displayed()
+
+    @allure.step('Дождаться пока элемент исчезнет со страницы')
+    def wait_until_element_is_invisible(self, locator):
+        WebDriverWait(self.driver, 10).until(expected_conditions.invisibility_of_element_located(locator))
+
+    @allure.step('Дождать отображения элемента на странице')
+    def wait_until_element_is_visible(self, locator):
+        WebDriverWait(self.driver, 10).until(expected_conditions.visibility_of_element_located(locator))
+
+    @allure.step('Дождаться появляение элемента в DOM-дереве')
+    def wait_until_element_to_be_presented(self, locator):
+        WebDriverWait(self.driver, 10).until(expected_conditions.presence_of_element_located(locator))
+
+    @allure.step('Дождаться появления текста в свойствах элементе')
+    def wait_until_text_to_be_presented_in_element(self, locator, text):
+        WebDriverWait(self.driver, 20).until(expected_conditions.text_to_be_present_in_element(locator, text))
