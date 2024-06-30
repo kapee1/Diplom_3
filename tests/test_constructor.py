@@ -47,10 +47,8 @@ class TestConstructor:
     def test_create_order_by_auth_user(self, driver, create_and_delete_user):
         main = MainPage(driver)
         login = LoginPage(driver)
-        response, payload = create_and_delete_user
-        email = payload['email']
-        password = payload['password']
-        login.authorization(email, password)
+        user_data = create_and_delete_user
+        login.authorization(user_data)
         main.create_new_order()
 
         assert main.is_order_identifier_text_displayed() is True

@@ -18,10 +18,8 @@ class TestFeedOrders:
     @allure.title('Заказать пользователя отображается в ленте')
     def test_user_order_displayed_in_feed(self, driver, create_and_delete_user):
         login = LoginPage(driver)
-        response, payload = create_and_delete_user
-        email = payload['email']
-        password = payload['password']
-        login.authorization(email, password)
+        user_data = create_and_delete_user
+        login.authorization(user_data)
 
         main = MainPage(driver)
         main.create_new_order()
@@ -39,10 +37,8 @@ class TestFeedOrders:
     @allure.title('Новый заказ добавляется к счетику всех заказов')
     def test_new_order_counts_in_global_counter(self, driver, create_and_delete_user):
         login = LoginPage(driver)
-        response, payload = create_and_delete_user
-        email = payload['email']
-        password = payload['password']
-        login.authorization(email, password)
+        user_data = create_and_delete_user
+        login.authorization(user_data)
 
         feed = FeedPage(driver)
         feed.open_page(urls.feed_page_url)
@@ -60,10 +56,8 @@ class TestFeedOrders:
     @allure.title('Новый заказа добавляется к счетчику сегодняшних заказов')
     def test_new_order_counts_in_today_counter(self, driver, create_and_delete_user):
         login = LoginPage(driver)
-        response, payload = create_and_delete_user
-        email = payload['email']
-        password = payload['password']
-        login.authorization(email, password)
+        user_data = create_and_delete_user
+        login.authorization(user_data)
 
         feed = FeedPage(driver)
         feed.open_page(urls.feed_page_url)
@@ -81,10 +75,8 @@ class TestFeedOrders:
     @allure.title('Новый заказ попадает в список заказов "В работе"')
     def test_new_orders_appears_in_work_section(self, driver, create_and_delete_user):
         login = LoginPage(driver)
-        response, payload = create_and_delete_user
-        email = payload['email']
-        password = payload['password']
-        login.authorization(email, password)
+        user_data = create_and_delete_user
+        login.authorization(user_data)
 
         main = MainPage(driver)
         main.click_on_logo_to_return_to_main()

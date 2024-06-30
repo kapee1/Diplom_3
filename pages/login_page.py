@@ -30,9 +30,9 @@ class LoginPage(BasePage):
         return self.wait_and_find_element(LoginPageLocators.active_password_field_locator).is_displayed()
 
     @allure.step('Авторизация пользователя')
-    def authorization(self, email, password):
+    def authorization(self, user):
         self.open_page(urls.login_url)
-        self.fill_email_field(email)
-        self.fill_password_field(password)
+        self.fill_email_field(user['email'])
+        self.fill_password_field(user['password'])
         self.click_on_login_button()
         self.wait_until_element_is_invisible(LoginPageLocators.email_field_locator)

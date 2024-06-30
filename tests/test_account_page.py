@@ -18,12 +18,8 @@ class TestAccountPage:
     def test_open_orders_history(self, driver, create_and_delete_user):
         login = LoginPage(driver)
         account = AccountPage(driver)
-
-        response, payload = create_and_delete_user
-        email = payload['email']
-        password = payload['password']
-
-        login.authorization(email, password)
+        user_data = create_and_delete_user
+        login.authorization(user_data)
         account.open_page(urls.profile_url)
         account.click_on_order_history_button()
 
@@ -33,10 +29,8 @@ class TestAccountPage:
     def test_logout_from_account(self, driver, create_and_delete_user):
         login = LoginPage(driver)
         account = AccountPage(driver)
-        response, payload = create_and_delete_user
-        email = payload['email']
-        password = payload['password']
-        login.authorization(email, password)
+        user_data = create_and_delete_user
+        login.authorization(user_data)
         login.open_page(urls.profile_url)
         account.click_on_log_out_button()
 

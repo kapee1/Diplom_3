@@ -25,8 +25,8 @@ class WebDriverFactory:
 
 @pytest.fixture(scope="function")
 def create_and_delete_user():  # Создание и удаление пользователя
-    payload = helpers.generate_user_data()
-    response = requests.post(urls.main_url + urls.CREATE_USER_API, json=payload)
-    yield response, payload
+    user_data = helpers.generate_user_data()
+    response = requests.post(urls.main_url + urls.CREATE_USER_API, json=user_data)
+    yield user_data
     access_token = response.json()['accessToken']
     requests.delete(urls.main_url + urls.DELETE_USER_API, headers={'Authorization': access_token})
